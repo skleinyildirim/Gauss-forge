@@ -1,5 +1,7 @@
 #pragma once 
 #include <vector>
+#include <iostream>
+#include <utility>
 
 template <typename K>
 class Matrix
@@ -10,12 +12,17 @@ class Matrix
         Matrix();
         Matrix(const std::vector<std::vector<K>> &values);
         Matrix(size_t rows, size_t cols);
-        // Matrix(const Matrix& copy);
-        // Matrix& operator=(const Matrix& copy);
-        // ~Matrix();
+        Matrix& operator=(const std::vector<std::vector<K>> &values);
 
         std::vector<std::vector<K>>   getMatrix() const;
-        void    setMatrix(K value);
+        size_t getNumberRows() const;
+        size_t getNumberCols() const;
+        std::pair<size_t, size_t> getShape() const;
+        bool isSquare() const;
 };
+
+template <typename K>
+std::ostream& operator<<(std::ostream& out, const Matrix<K>& m);
+
 
 #include "Matrix.tpp"

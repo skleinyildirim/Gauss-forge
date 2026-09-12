@@ -8,7 +8,11 @@ Matrix<K>::Matrix(const std::vector<std::vector<K>> &values) : _matrix(values) {
 template <typename K>
 Matrix<K>::Matrix(size_t rows, size_t cols) : _matrix(rows, std::vector<K>(cols, K())) {}
 
-
+template <typename K>
+Matrix<K>& Matrix<K>::operator=(const std::vector<std::vector<K>> &values) {
+    _matrix = values;
+    return (*this);
+}
 
 template <typename K>
 std::vector<std::vector<K>>   Matrix<K>::getMatrix() const
@@ -16,8 +20,41 @@ std::vector<std::vector<K>>   Matrix<K>::getMatrix() const
     return _matrix;
 }
 
-// template <typename K>
-// void    Matrix<K>::setMatrix(std::vector<std::vector<K>> value) 
-// { 
-//     _matrix(value)
-// }
+
+template <typename K>
+size_t Matrix<K>::getNumberRows() const {
+    return (_matrix.size());
+}
+
+template <typename K>
+size_t Matrix<K>::getNumberCols() const {
+    if (_matrix.empty())
+        return (0);
+    return (_matrix[0].size());
+}
+
+template <typename K>
+std::pair<size_t, size_t> Matrix<K>::getShape() const
+{
+    return (std::pair<size_t, size_t>(getNumberRows(), getNumberCols()));
+}
+
+template <typename K>
+bool Matrix<K>::isSquare() const
+{
+    return (getNumberRows() == getNumberCols());
+}
+
+template <typename K>
+std::ostream& operator<<(std::ostream& out, const Matrix<K>& m)
+{
+    for (size_t i = 0; i < m.getNumberRows(); i++)
+    {
+        for (size_t j = 0; j < m.getNumberCols(); j++)
+        {
+            out << m.getMatrix()[i][j] << " ";
+        }
+        out << std::endl;
+    }
+    return (out);
+}
