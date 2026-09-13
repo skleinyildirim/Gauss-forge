@@ -1,4 +1,5 @@
 #include "Matrix.hpp"
+#include "Vector.hpp"
 
 int main()
 {
@@ -34,5 +35,30 @@ int main()
     
     matrixA = values;
     std::cout << matrixA;
+
+    std::cout << std::endl << "===== Vector =====" << std::endl;
+
+    std::cout << std::endl << "-- constructeur par defaut --" << std::endl;
+    Vector<double> emptyVec;
+    std::cout << emptyVec;
+    std::cout << "size: " << emptyVec.getSize() << std::endl;
+
+    std::cout << std::endl << "-- constructeur par taille (4) --" << std::endl;
+    Vector<double> zerosVec(4);
+    std::cout << zerosVec;
+    std::cout << "size: " << zerosVec.getSize() << std::endl;
+
+    std::cout << std::endl << "-- constructeur a partir d'un vector<K> --" << std::endl;
+    std::vector<double> vecValues = {1.0, 2.0, 3.0};
+    Vector<double> vectorA(vecValues);
+    std::cout << vectorA;
+    std::cout << "size: " << vectorA.getSize() << std::endl;
+
+    std::cout << std::endl << "-- operator= --" << std::endl;
+    std::vector<double> otherValues = {4.0, 5.0};
+    vectorA = otherValues;
+    std::cout << vectorA;
+    std::cout << "size: " << vectorA.getSize() << std::endl;
+
     return 0;
 }
