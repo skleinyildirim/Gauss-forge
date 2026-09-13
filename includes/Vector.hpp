@@ -14,7 +14,7 @@ class Vector
         Vector(size_t size);
         Vector& operator=(const std::vector<K> &values);
 
-        std::vector<K>   getVector() const;
+        const std::vector<K>&   getVector() const;
         size_t getSize() const;
 };
 
