@@ -32,3 +32,19 @@ std::ostream& operator<<(std::ostream& out, const Vector<K>& v) {
     }
     return (out);
 }
+
+//ex00
+template <typename K>
+void Vector<K>::add(const Vector<K>& v) {
+    assert(getSize() == v.getSize());
+    for (size_t i = 0; i < getSize(); i++)
+    {
+        _vector[i] += v._vector[i];
+    }
+}
+
+template <typename K>
+void sub(const Vector<K>& v);
+
+template <typename K>
+void scl(K a);

@@ -16,6 +16,11 @@ class Vector
 
         const std::vector<K>&   getVector() const;
         size_t getSize() const;
+
+        //ex00
+        void add(const Vector<K>& v);
+        void sub(const Vector<K>& v);
+        void scl(K a);
 };
 
 template <typename K>
