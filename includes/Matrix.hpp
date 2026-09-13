@@ -3,6 +3,8 @@
 #include <iostream>
 #include <utility>
 
+//verifier si la matrice donnee dans le constructeur a le meme nombre de colonnes sur toutes les lignes 
+
 template <typename K>
 class Matrix
 {
@@ -14,7 +16,7 @@ class Matrix
         Matrix(size_t rows, size_t cols);
         Matrix& operator=(const std::vector<std::vector<K>> &values);
 
-        std::vector<std::vector<K>>   getMatrix() const;
+        const std::vector<std::vector<K>>&   getMatrix() const;
         size_t getNumberRows() const;
         size_t getNumberCols() const;
         std::pair<size_t, size_t> getShape() const;

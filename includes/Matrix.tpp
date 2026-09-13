@@ -15,7 +15,7 @@ Matrix<K>& Matrix<K>::operator=(const std::vector<std::vector<K>> &values) {
 }
 
 template <typename K>
-std::vector<std::vector<K>>   Matrix<K>::getMatrix() const
+const std::vector<std::vector<K>>&   Matrix<K>::getMatrix() const
 {
     return _matrix;
 }
@@ -48,11 +48,12 @@ bool Matrix<K>::isSquare() const
 template <typename K>
 std::ostream& operator<<(std::ostream& out, const Matrix<K>& m)
 {
+    const std::vector<std::vector<K>>& mat = m.getMatrix();
     for (size_t i = 0; i < m.getNumberRows(); i++)
     {
         for (size_t j = 0; j < m.getNumberCols(); j++)
         {
-            out << m.getMatrix()[i][j] << " ";
+            out << mat[i][j] << " ";
         }
         out << std::endl;
     }
