@@ -97,5 +97,26 @@ int main()
     mScl.scl(2.0);
     std::cout << "scl:" << std::endl << mScl;    // attendu: 2 4 / 6 8
 
+    std::cout << std::endl << BLUE << "ex01" << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tlinear_combination:" << RESET << std::endl;
+
+    std::vector<Vector<double>> basis = {
+        Vector<double>({1.0, 0.0, 0.0}),
+        Vector<double>({0.0, 1.0, 0.0}),
+        Vector<double>({0.0, 0.0, 1.0})
+    };
+    std::vector<double> basisCoefs = {10.0, -2.0, 0.5};
+    Vector<double> combBasis = linear_combination(basis, basisCoefs);
+    std::cout << combBasis << std::endl;   // attendu: 10 / -2 / 0.5
+
+    std::vector<Vector<double>> vecs = {
+        Vector<double>({1.0, 2.0, 3.0}),
+        Vector<double>({0.0, 10.0, -100.0})
+    };
+    std::vector<double> vecsCoefs = {10.0, -2.0};
+    Vector<double> combVecs = linear_combination(vecs, vecsCoefs);
+    std::cout << combVecs;   // attendu: 10 / 0 / 230
+
     return 0;
 }

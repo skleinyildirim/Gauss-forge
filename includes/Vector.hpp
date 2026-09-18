@@ -3,6 +3,7 @@
 #include <iostream>
 #include <utility>
 #include <cassert>
+#include <cmath>
 
 template <typename K>
 class Vector
@@ -26,6 +27,10 @@ class Vector
 
 template <typename K>
 std::ostream& operator<<(std::ostream& out, const Vector<K>& v);
+
+//ex01
+template <typename K>
+Vector<K> linear_combination(const std::vector<Vector<K>>& u, const std::vector<K>& coefs);
 
 
 #include "Vector.tpp"

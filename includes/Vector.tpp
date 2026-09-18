@@ -59,3 +59,17 @@ void Vector<K>::scl(K a) {
         _vector[i] *= a;
     }
 }
+
+//ex01
+template <typename K>
+Vector<K> linear_combination(const std::vector<Vector<K>>& u, const std::vector<K>& coefs) {
+    std::vector<K> result(u[0].getSize(), K());
+    for (size_t i = 0; i < u.size(); i++) {
+        const std::vector<K>& vect = u[i].getVector();
+        for (size_t j = 0; j < u[i].getSize(); j++) {
+            result[j] = std::fma(coefs[i], vect[j], result[j]);
+        }
+    }
+    Vector<K> r(result);
+    return(r);
+}
