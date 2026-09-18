@@ -23,6 +23,10 @@ class Matrix
         std::pair<size_t, size_t> getShape() const;
         bool isSquare() const;
 
+        Matrix<K> operator+(const Matrix<K>& v) const;
+        Matrix<K> operator-(const Matrix<K>& v) const;
+        Matrix<K> operator*(K a) const;
+
         //ex00
         void add(const Matrix<K>& m);
         void sub(const Matrix<K>& m);

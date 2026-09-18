@@ -46,6 +46,47 @@ bool Matrix<K>::isSquare() const
 }
 
 template <typename K>
+Matrix<K> Matrix<K>::operator+(const Matrix<K>& v) const {
+    assert(getShape() == v.getShape());
+    Matrix<K> mat(getNumberRows(), getNumberCols());
+    for (size_t i = 0; i < getNumberRows(); i++)
+    {
+        for (size_t j = 0; j < getNumberCols(); j++)
+        {
+            mat._matrix[i][j] = _matrix[i][j] + v._matrix[i][j];
+        }
+    }
+    return (mat);
+}
+
+template <typename K>
+Matrix<K> Matrix<K>::operator-(const Matrix<K>& v) const {
+    assert(getShape() == v.getShape());
+    Matrix<K> mat(getNumberRows(), getNumberCols());
+    for (size_t i = 0; i < getNumberRows(); i++)
+    {
+        for (size_t j = 0; j < getNumberCols(); j++)
+        {
+            mat._matrix[i][j] = _matrix[i][j] - v._matrix[i][j];
+        }
+    }
+    return (mat);
+}
+
+template <typename K>
+Matrix<K> Matrix<K>::operator*(K a) const {
+    Matrix<K> mat(getNumberRows(), getNumberCols());
+    for (size_t i = 0; i < getNumberRows(); i++)
+    {
+        for (size_t j = 0; j < getNumberCols(); j++)
+        {
+            mat._matrix[i][j] = _matrix[i][j] * a;
+        }
+    }
+    return (mat);
+}
+
+template <typename K>
 std::ostream& operator<<(std::ostream& out, const Matrix<K>& m)
 {
     const std::vector<std::vector<K>>& mat = m.getMatrix();

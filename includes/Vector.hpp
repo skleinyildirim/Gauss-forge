@@ -19,10 +19,15 @@ class Vector
         const std::vector<K>&   getVector() const;
         size_t getSize() const;
 
+        Vector<K> operator+(const Vector<K>& v) const;
+        Vector<K> operator-(const Vector<K>& v) const;
+        Vector<K> operator*(K a) const;
+
         //ex00
         void add(const Vector<K>& v);
         void sub(const Vector<K>& v);
         void scl(K a);
+
 };
 
 template <typename K>

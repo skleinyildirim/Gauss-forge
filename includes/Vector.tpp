@@ -24,6 +24,39 @@ size_t Vector<K>::getSize() const {
 }
 
 template <typename K>
+Vector<K> Vector<K>::operator+(const Vector<K>& v) const{
+    assert(getSize() == v.getSize());
+    Vector<K> result(getSize());
+    for (size_t i = 0; i < getSize(); i++)
+    {
+        result._vector[i] = _vector[i] + v._vector[i];
+    }
+    return (result);
+}
+
+template <typename K>
+Vector<K> Vector<K>::operator-(const Vector<K>& v) const{
+    assert(getSize() == v.getSize());
+    Vector<K> result(getSize());
+    for (size_t i = 0; i < getSize(); i++)
+    {
+        result._vector[i] = _vector[i] - v._vector[i];
+    }
+    return (result);
+}
+
+template <typename K>
+Vector<K> Vector<K>::operator*(K a) const{
+    Vector<K> result(getSize());
+    for (size_t i = 0; i < getSize(); i++)
+    {
+        result._vector[i] = _vector[i] * a;
+    }
+    return (result);
+}
+
+
+template <typename K>
 std::ostream& operator<<(std::ostream& out, const Vector<K>& v) {
     const std::vector<K>& vect = v.getVector();
     for (size_t i = 0; i < v.getSize(); i++)

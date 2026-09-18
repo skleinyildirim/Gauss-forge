@@ -1,5 +1,6 @@
 #include "Matrix.hpp"
 #include "Vector.hpp"
+#include "LinearAlgebra.hpp"
 #include "Colors.hpp"
 
 int main()
@@ -116,7 +117,29 @@ int main()
     };
     std::vector<double> vecsCoefs = {10.0, -2.0};
     Vector<double> combVecs = linear_combination(vecs, vecsCoefs);
-    std::cout << combVecs;   // attendu: 10 / 0 / 230
+    std::cout << combVecs << std::endl;   // attendu: 10 / 0 / 230
+
+
+    std::cout << std::endl << BLUE << "ex02" << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tScalaires:" << RESET << std::endl;
+
+    std::cout << lerp(0.0, 1.0, 0.0) << std::endl;    // attendu: 0.0
+    std::cout << lerp(0.0, 1.0, 1.0) << std::endl;    // attendu: 1.0
+    std::cout << lerp(0.0, 1.0, 0.5) << std::endl;    // attendu: 0.5
+    std::cout << lerp(21.0, 42.0, 0.3) << std::endl;  // attendu: 27.3
+
+    std::cout << std::endl << MAGENTA << "\t\tVector:" << RESET << std::endl;
+
+    Vector<double> lerpU({2.0, 1.0});
+    Vector<double> lerpV({4.0, 2.0});
+    std::cout << lerp(lerpU, lerpV, 0.3);   // attendu: 2.6 / 1.3
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix:" << RESET << std::endl;
+
+    Matrix<double> lerpMu({{2.0, 1.0}, {3.0, 4.0}});
+    Matrix<double> lerpMv({{20.0, 10.0}, {30.0, 40.0}});
+    std::cout << lerp(lerpMu, lerpMv, 0.5); // attendu: 11 5.5 / 16.5 22
 
     return 0;
 }
