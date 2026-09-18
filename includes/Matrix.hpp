@@ -1,6 +1,7 @@
 #pragma once 
 #include <vector>
 #include <iostream>
+#include <cassert>
 #include <utility>
 
 //verifier si la matrice donnee dans le constructeur a le meme nombre de colonnes sur toutes les lignes 
@@ -21,6 +22,11 @@ class Matrix
         size_t getNumberCols() const;
         std::pair<size_t, size_t> getShape() const;
         bool isSquare() const;
+
+        //ex00
+        void add(const Matrix<K>& m);
+        void sub(const Matrix<K>& m);
+        void scl(K a);
 };
 
 template <typename K>

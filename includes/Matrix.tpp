@@ -51,11 +51,52 @@ std::ostream& operator<<(std::ostream& out, const Matrix<K>& m)
     const std::vector<std::vector<K>>& mat = m.getMatrix();
     for (size_t i = 0; i < m.getNumberRows(); i++)
     {
+        out << "[ ";
         for (size_t j = 0; j < m.getNumberCols(); j++)
         {
             out << mat[i][j] << " ";
         }
-        out << std::endl;
+        out << "]" << std::endl;
     }
     return (out);
+}
+
+
+//ex00
+template <typename K>
+void Matrix<K>::add(const Matrix<K>& m) {
+    const std::vector<std::vector<K>>& mat = m.getMatrix();
+
+    assert(getShape() == m.getShape());
+    for (size_t i = 0; i < getNumberRows(); i++)
+    {
+        for (size_t j = 0; j < getNumberCols(); j++)
+        {
+            _matrix[i][j] += mat[i][j];
+        }
+    }
+}
+
+template <typename K>
+void Matrix<K>::sub(const Matrix<K>& m) {
+    const std::vector<std::vector<K>>& mat = m.getMatrix();
+    assert(getShape() == m.getShape());
+    for (size_t i = 0; i < getNumberRows(); i++)
+    {
+        for (size_t j = 0; j < getNumberCols(); j++)
+        {
+            _matrix[i][j] -= mat[i][j];
+        }
+    }
+}
+
+template <typename K>
+void Matrix<K>::scl(K a) {
+    for (size_t i = 0; i < getNumberRows(); i++)
+    {
+        for (size_t j = 0; j < getNumberCols(); j++)
+        {
+            _matrix[i][j] *= a;
+        }
+    }
 }

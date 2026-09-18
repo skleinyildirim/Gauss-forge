@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <utility>
+#include <cassert>
 
 template <typename K>
 class Vector

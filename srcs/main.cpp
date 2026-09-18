@@ -1,5 +1,6 @@
 #include "Matrix.hpp"
 #include "Vector.hpp"
+#include "Colors.hpp"
 
 int main()
 {
@@ -59,6 +60,42 @@ int main()
     vectorA = otherValues;
     std::cout << vectorA;
     std::cout << "size: " << vectorA.getSize() << std::endl;
+
+
+    std::cout << std::endl << BLUE << "ex00" << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tVector:" << RESET << std::endl;
+
+    Vector<double> vAdd1({2.0, 3.0});
+    Vector<double> vAdd2({5.0, 7.0});
+    std::cout << "u:" << std::endl << vAdd1 << "v:" << std::endl << vAdd2;
+    vAdd1.add(vAdd2);
+    std::cout << "add:" << std::endl << vAdd1;   // attendu: 7 / 10
+
+    Vector<double> vSub1({2.0, 3.0});
+    Vector<double> vSub2({5.0, 7.0});
+    vSub1.sub(vSub2);
+    std::cout << "sub:" << std::endl << vSub1;   // attendu: -3 / -4
+
+    Vector<double> vScl({2.0, 3.0});
+    vScl.scl(2.0);
+    std::cout << "scl:" << std::endl << vScl;    // attendu: 4 / 6
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix:" << RESET << std::endl;
+
+    Matrix<double> mAdd1({{1.0, 2.0}, {3.0, 4.0}});
+    Matrix<double> mAdd2({{7.0, 4.0}, {-2.0, 2.0}});
+    mAdd1.add(mAdd2);
+    std::cout << "add:" << std::endl << mAdd1;   // attendu: 8 6 / 1 6
+
+    Matrix<double> mSub1({{1.0, 2.0}, {3.0, 4.0}});
+    Matrix<double> mSub2({{7.0, 4.0}, {-2.0, 2.0}});
+    mSub1.sub(mSub2);
+    std::cout << "sub:" << std::endl << mSub1;   // attendu: -6 -2 / 5 2
+
+    Matrix<double> mScl({{1.0, 2.0}, {3.0, 4.0}});
+    mScl.scl(2.0);
+    std::cout << "scl:" << std::endl << mScl;    // attendu: 2 4 / 6 8
 
     return 0;
 }

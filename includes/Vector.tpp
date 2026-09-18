@@ -28,7 +28,7 @@ std::ostream& operator<<(std::ostream& out, const Vector<K>& v) {
     const std::vector<K>& vect = v.getVector();
     for (size_t i = 0; i < v.getSize(); i++)
     {
-        out << vect[i] << std::endl;
+        out << "[ " << vect[i] << " ]" << std::endl;
     }
     return (out);
 }
@@ -44,7 +44,18 @@ void Vector<K>::add(const Vector<K>& v) {
 }
 
 template <typename K>
-void sub(const Vector<K>& v);
+void Vector<K>::sub(const Vector<K>& v) {
+    assert(getSize() == v.getSize());
+    for (size_t i = 0; i < getSize(); i++)
+    {
+        _vector[i] -= v._vector[i];
+    }
+}
 
 template <typename K>
-void scl(K a);
+void Vector<K>::scl(K a) {
+    for (size_t i = 0; i < getSize(); i++)
+    {
+        _vector[i] *= a;
+    }
+}
