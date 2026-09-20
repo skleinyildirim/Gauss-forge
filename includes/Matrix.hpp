@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cassert>
 #include <utility>
+#include "Vector.hpp"
 
 //verifier si la matrice donnee dans le constructeur a le meme nombre de colonnes sur toutes les lignes 
 
@@ -31,6 +32,11 @@ class Matrix
         void add(const Matrix<K>& m);
         void sub(const Matrix<K>& m);
         void scl(K a);
+
+        //ex07
+        Vector<K> mul_vec(const Vector<K>& vec) const;
+        Matrix<K> mul_mat(const Matrix<K>& mat) const;
+
 };
 
 template <typename K>

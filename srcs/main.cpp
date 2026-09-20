@@ -244,5 +244,44 @@ int main()
     std::cout << "Result: " << std::endl << RED << cross_product(u1, v1) << RESET << std::endl;
 
 
+    std::cout << std::endl << BLUE << "ex07" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tLinear map, Matrix multiplication:" << RESET << std::endl;
+    
+    std::cout << std::endl << MAGENTA << "\t\tmul_vec:" << RESET << std::endl;
+    
+    Matrix<double> mat_a({{1.0, 0.0}, {0.0, 1.0}});
+    u = {4.0, 2.0};
+
+    std::cout << "matrix a: " << std::endl << mat_a;
+    std::cout << "vector u: " << std::endl << u;
+    std::cout << "Result: " << std::endl << RED << mat_a.mul_vec(u) << RESET << std::endl;
+
+    mat_a = {{2.0, 0.0}, {0.0, 2.0}};
+    std::cout << "matrix a: " << std::endl << mat_a;
+    std::cout << "vector u: " << std::endl << u;
+    std::cout << "Result: " << std::endl << RED << mat_a.mul_vec(u) << RESET << std::endl;
+
+    mat_a = {{2.0, -2.0}, {-2.0, 2.0}};
+    std::cout << "matrix a: " << std::endl << mat_a;
+    std::cout << "vector u: " << std::endl << u;
+    std::cout << "Result: " << std::endl << RED << mat_a.mul_vec(u) << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tmul_mat:" << RESET << std::endl;
+
+    mat_a = {{1.0, 0.0}, {0.0, 1.0}};
+    Matrix<double> mat_b({{1.0, 0.0}, {0.0, 1.0}});
+    std::cout << "matrix a: " << std::endl << mat_a;
+    std::cout << "matrix b: " << std::endl << mat_b;
+    std::cout << "Result: " << std::endl << RED << mat_a.mul_mat(mat_b) << RESET << std::endl;
+
+    mat_b = {{2.0, 1.0}, {4.0, 2.0}};
+    std::cout << "matrix a: " << std::endl << mat_a;
+    std::cout << "matrix b: " << std::endl << mat_b;
+    std::cout << "Result: " << std::endl << RED << mat_a.mul_mat(mat_b) << RESET << std::endl;
+
+    mat_a = {{3.0, -5.0}, {6.0, 8.0}};
+    std::cout << "matrix a: " << std::endl << mat_a;
+    std::cout << "matrix b: " << std::endl << mat_b;
+    std::cout << "Result: " << std::endl << RED << mat_a.mul_mat(mat_b) << RESET << std::endl;
     return 0;
 }

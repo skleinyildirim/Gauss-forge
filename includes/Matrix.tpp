@@ -141,3 +141,29 @@ void Matrix<K>::scl(K a) {
         }
     }
 }
+
+//ex07
+template <typename K>
+Vector<K> Matrix<K>::mul_vec(const Vector<K>& vec) const {
+    assert(getNumberCols() == vec.getSize());
+    std::vector<K> result(getNumberRows(), K());
+    for (size_t i = 0; i < getNumberRows(); i++) {
+        result[i] = vec.dot(_matrix[i]);
+    }
+    Vector<K> v(result);
+    return (v);
+}
+
+template <typename K>
+Matrix<K> Matrix<K>::mul_mat(const Matrix<K>& mat) const {
+    assert(getNumberCols() == mat.getNumberRows());
+    Matrix<K> result(getNumberRows(), mat.getNumberCols());
+    for (size_t i = 0; i < getNumberRows(); i++) {
+        for (size_t j = 0; j < mat.getNumberCols(); j++) {
+            for (size_t k = 0; k < getNumberCols(); k++) {
+                result._matrix[i][j] += _matrix[i][k] * mat._matrix[k][j];
+            }
+        }
+    }
+    return (result);
+}
