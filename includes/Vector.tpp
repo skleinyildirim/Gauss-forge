@@ -106,3 +106,15 @@ Vector<K> linear_combination(const std::vector<Vector<K>>& u, const std::vector<
     Vector<K> r(result);
     return(r);
 }
+
+//ex03
+template <typename K>
+K Vector<K>::dot(const Vector<K>& v) const {
+    assert(getSize() == v.getSize());
+    K result = K();
+    for (size_t i = 0; i < getSize(); i++){
+        result = std::fma(_vector[i], v._vector[i], result);
+    }
+    return (result);
+}
+

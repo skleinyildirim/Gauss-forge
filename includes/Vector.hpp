@@ -28,6 +28,9 @@ class Vector
         void sub(const Vector<K>& v);
         void scl(K a);
 
+        //ex03
+        K dot(const Vector<K>& v) const;
+
 };
 
 template <typename K>

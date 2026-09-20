@@ -141,5 +141,24 @@ int main()
     Matrix<double> lerpMv({{20.0, 10.0}, {30.0, 40.0}});
     std::cout << lerp(lerpMu, lerpMv, 0.5); // attendu: 11 5.5 / 16.5 22
 
+
+    std::cout << std::endl << BLUE << "ex03" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tDot product:" << RESET << std::endl;
+
+    Vector<double> a({0.0, 0.0});
+    Vector<double> b({1.0, 1.0});
+
+    std::cout << "vector a: " << std::endl << a << "vector b:" << std::endl << b;
+    std::cout << "result : " << a.dot(b) << std::endl;
+
+    a = {1.0, 1.0};
+    std::cout << "vector a: " << std::endl << a << "vector b:" << std::endl << b;
+    std::cout << "result : " << a.dot(b) << std::endl;
+
+    a = {-1.0, 6.0};
+    b = {3.0, 2.0};
+    std::cout << "vector a: " << std::endl << a << "vector b:" << std::endl << b;
+    std::cout << "result : " << a.dot(b) << std::endl;
+
     return 0;
 }
