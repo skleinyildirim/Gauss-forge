@@ -34,7 +34,7 @@ int main()
     Matrix<double> square(3, 3);
     std::cout << square;
     std::cout << "is_square: " << square.isSquare() << std::endl;
-    
+
     matrixA = values;
     std::cout << matrixA;
 
@@ -71,32 +71,32 @@ int main()
     Vector<double> vAdd2({5.0, 7.0});
     std::cout << "u:" << std::endl << vAdd1 << "v:" << std::endl << vAdd2;
     vAdd1.add(vAdd2);
-    std::cout << "add:" << std::endl << vAdd1;   // attendu: 7 / 10
+    std::cout << "add:" << std::endl << RED << vAdd1 << RESET;   // attendu: 7 / 10
 
     Vector<double> vSub1({2.0, 3.0});
     Vector<double> vSub2({5.0, 7.0});
     vSub1.sub(vSub2);
-    std::cout << "sub:" << std::endl << vSub1;   // attendu: -3 / -4
+    std::cout << "sub:" << std::endl << RED << vSub1 << RESET;   // attendu: -3 / -4
 
     Vector<double> vScl({2.0, 3.0});
     vScl.scl(2.0);
-    std::cout << "scl:" << std::endl << vScl;    // attendu: 4 / 6
+    std::cout << "scl:" << std::endl << RED << vScl << RESET;    // attendu: 4 / 6
 
     std::cout << std::endl << MAGENTA << "\t\tMatrix:" << RESET << std::endl;
 
     Matrix<double> mAdd1({{1.0, 2.0}, {3.0, 4.0}});
     Matrix<double> mAdd2({{7.0, 4.0}, {-2.0, 2.0}});
     mAdd1.add(mAdd2);
-    std::cout << "add:" << std::endl << mAdd1;   // attendu: 8 6 / 1 6
+    std::cout << "add:" << std::endl << RED << mAdd1 << RESET;   // attendu: 8 6 / 1 6
 
     Matrix<double> mSub1({{1.0, 2.0}, {3.0, 4.0}});
     Matrix<double> mSub2({{7.0, 4.0}, {-2.0, 2.0}});
     mSub1.sub(mSub2);
-    std::cout << "sub:" << std::endl << mSub1;   // attendu: -6 -2 / 5 2
+    std::cout << "sub:" << std::endl << RED << mSub1 << RESET;   // attendu: -6 -2 / 5 2
 
     Matrix<double> mScl({{1.0, 2.0}, {3.0, 4.0}});
     mScl.scl(2.0);
-    std::cout << "scl:" << std::endl << mScl;    // attendu: 2 4 / 6 8
+    std::cout << "scl:" << std::endl << RED << mScl << RESET;    // attendu: 2 4 / 6 8
 
     std::cout << std::endl << BLUE << "ex01" << RESET << std::endl;
 
@@ -109,7 +109,7 @@ int main()
     };
     std::vector<double> basisCoefs = {10.0, -2.0, 0.5};
     Vector<double> combBasis = linear_combination(basis, basisCoefs);
-    std::cout << combBasis << std::endl;   // attendu: 10 / -2 / 0.5
+    std::cout << RED << combBasis << RESET << std::endl;   // attendu: 10 / -2 / 0.5
 
     std::vector<Vector<double>> vecs = {
         Vector<double>({1.0, 2.0, 3.0}),
@@ -117,29 +117,29 @@ int main()
     };
     std::vector<double> vecsCoefs = {10.0, -2.0};
     Vector<double> combVecs = linear_combination(vecs, vecsCoefs);
-    std::cout << combVecs << std::endl;   // attendu: 10 / 0 / 230
+    std::cout << RED << combVecs << RESET << std::endl;   // attendu: 10 / 0 / 230
 
 
     std::cout << std::endl << BLUE << "ex02" << RESET << std::endl;
 
     std::cout << std::endl << MAGENTA << "\t\tScalaires:" << RESET << std::endl;
 
-    std::cout << lerp(0.0, 1.0, 0.0) << std::endl;    // attendu: 0.0
-    std::cout << lerp(0.0, 1.0, 1.0) << std::endl;    // attendu: 1.0
-    std::cout << lerp(0.0, 1.0, 0.5) << std::endl;    // attendu: 0.5
-    std::cout << lerp(21.0, 42.0, 0.3) << std::endl;  // attendu: 27.3
+    std::cout << RED << lerp(0.0, 1.0, 0.0) << RESET << std::endl;    // attendu: 0.0
+    std::cout << RED << lerp(0.0, 1.0, 1.0) << RESET << std::endl;    // attendu: 1.0
+    std::cout << RED << lerp(0.0, 1.0, 0.5) << RESET << std::endl;    // attendu: 0.5
+    std::cout << RED << lerp(21.0, 42.0, 0.3) << RESET << std::endl;  // attendu: 27.3
 
     std::cout << std::endl << MAGENTA << "\t\tVector:" << RESET << std::endl;
 
     Vector<double> lerpU({2.0, 1.0});
     Vector<double> lerpV({4.0, 2.0});
-    std::cout << lerp(lerpU, lerpV, 0.3);   // attendu: 2.6 / 1.3
+    std::cout << RED << lerp(lerpU, lerpV, 0.3) << RESET;   // attendu: 2.6 / 1.3
 
     std::cout << std::endl << MAGENTA << "\t\tMatrix:" << RESET << std::endl;
 
     Matrix<double> lerpMu({{2.0, 1.0}, {3.0, 4.0}});
     Matrix<double> lerpMv({{20.0, 10.0}, {30.0, 40.0}});
-    std::cout << lerp(lerpMu, lerpMv, 0.5); // attendu: 11 5.5 / 16.5 22
+    std::cout << RED << lerp(lerpMu, lerpMv, 0.5) << RESET; // attendu: 11 5.5 / 16.5 22
 
 
     std::cout << std::endl << BLUE << "ex03" << RESET << std::endl;
@@ -149,16 +149,16 @@ int main()
     Vector<double> b({1.0, 1.0});
 
     std::cout << "vector a: " << std::endl << a << "vector b:" << std::endl << b;
-    std::cout << "result : " << a.dot(b) << std::endl;
+    std::cout << "result : " << RED << a.dot(b) << RESET << std::endl;
 
     a = {1.0, 1.0};
     std::cout << "vector a: " << std::endl << a << "vector b:" << std::endl << b;
-    std::cout << "result : " << a.dot(b) << std::endl;
+    std::cout << "result : " << RED << a.dot(b) << RESET << std::endl;
 
     a = {-1.0, 6.0};
     b = {3.0, 2.0};
     std::cout << "vector a: " << std::endl << a << "vector b:" << std::endl << b;
-    std::cout << "result : " << a.dot(b) << std::endl;
+    std::cout << "result : " << RED << a.dot(b) << RESET << std::endl;
 
 
     std::cout << std::endl << BLUE << "ex04" << RESET << std::endl;
@@ -168,26 +168,26 @@ int main()
 
     std::cout << "vector c: " << std::endl << c << std::endl;
     std::cout << "result : " << std::endl;
-    std::cout << "\t\tManhattan norm: " << c.norm_1() << std::endl;
-    std::cout << "\t\tEuclidean norm: " << c.norm() << std::endl;
-    std::cout << "\t\tSupremum norm: " << c.norm_inf() << std::endl;
+    std::cout << "\t\tManhattan norm: " << RED << c.norm_1() << RESET << std::endl;
+    std::cout << "\t\tEuclidean norm: " << RED << c.norm() << RESET << std::endl;
+    std::cout << "\t\tSupremum norm: " << RED << c.norm_inf() << RESET << std::endl;
     std::cout << std::endl;
 
     c = {1.0, 2.0, 3.0};
     std::cout << "vector c: " << std::endl << c << std::endl;
     std::cout << "result : " << std::endl;
-    std::cout << "\t\tManhattan norm: " << c.norm_1() << std::endl;
-    std::cout << "\t\tEuclidean norm: " << c.norm() << std::endl;
-    std::cout << "\t\tSupremum norm: " << c.norm_inf() << std::endl;
+    std::cout << "\t\tManhattan norm: " << RED << c.norm_1() << RESET << std::endl;
+    std::cout << "\t\tEuclidean norm: " << RED << c.norm() << RESET << std::endl;
+    std::cout << "\t\tSupremum norm: " << RED << c.norm_inf() << RESET << std::endl;
     std::cout << std::endl;
 
-    
+
     a = {-1.0, -2.0};
     std::cout << "vector a: " << std::endl << a << std::endl;
     std::cout << "result : " << std::endl;
-    std::cout << "\t\tManhattan norm: " << a.norm_1() << std::endl;
-    std::cout << "\t\tEuclidean norm: " << a.norm() << std::endl;
-    std::cout << "\t\tSupremum norm: " << a.norm_inf() << std::endl;
+    std::cout << "\t\tManhattan norm: " << RED << a.norm_1() << RESET << std::endl;
+    std::cout << "\t\tEuclidean norm: " << RED << a.norm() << RESET << std::endl;
+    std::cout << "\t\tSupremum norm: " << RED << a.norm_inf() << RESET << std::endl;
     std::cout << std::endl;
 
     std::cout << std::endl << BLUE << "ex05" << RESET << std::endl;
@@ -197,32 +197,32 @@ int main()
     Vector<double> v({1.0, 0.0});
 
     std::cout << "vector u: " << std::endl << u << "vector v:" << std::endl << v;
-    std::cout << "Result: " << angle_cos(u, v) << std::endl;
+    std::cout << "Result: " << RED << angle_cos(u, v) << RESET << std::endl;
     std::cout << std::endl;
 
     v = {0.0, 1.0};
     std::cout << "vector u: " << std::endl << u << "vector v:" << std::endl << v;
-    std::cout << "Result: " << angle_cos(u, v) << std::endl;
+    std::cout << "Result: " << RED << angle_cos(u, v) << RESET << std::endl;
     std::cout << std::endl;
 
 
     u = {-1.0, 1.0};
     v = {1.0, -1.0};
     std::cout << "vector u: " << std::endl << u << "vector v:" << std::endl << v;
-    std::cout << "Result: " << angle_cos(u, v) << std::endl;
+    std::cout << "Result: " << RED << angle_cos(u, v) << RESET << std::endl;
     std::cout << std::endl;
 
 
     u = {2.0, 1.0};
     v = {4.0, 2.0};
     std::cout << "vector u: " << std::endl << u << "vector v:" << std::endl << v;
-    std::cout << "Result: " << angle_cos(u, v) << std::endl;
+    std::cout << "Result: " << RED << angle_cos(u, v) << RESET << std::endl;
     std::cout << std::endl;
 
     Vector<double> u1({1.0, 2.0, 3.0});
     Vector<double> v1({4.0, 5.0, 6.0});
     std::cout << "vector u: " << std::endl << u1 << "vector v:" << std::endl << v1;
-    std::cout << "Result: " << angle_cos(u1, v1) << std::endl;
+    std::cout << "Result: " << RED << angle_cos(u1, v1) << RESET << std::endl;
     std::cout << std::endl;
 
     std::cout << std::endl << BLUE << "ex06" << RESET << std::endl;
@@ -231,17 +231,17 @@ int main()
     u1 = {0.0, 0.0, 1.0};
     v1 = {1.0, 0.0, 0.0};
     std::cout << "vector u: " << std::endl << u1 << "vector v:" << std::endl << v1;
-    std::cout << "Result: " << std::endl << cross_product(u1, v1) << std::endl;
+    std::cout << "Result: " << std::endl << RED << cross_product(u1, v1) << RESET << std::endl;
 
     u1 = {1.0, 2.0, 3.0};
     v1 = {4.0, 5.0, 6.0};
     std::cout << "vector u: " << std::endl << u1 << "vector v:" << std::endl << v1;
-    std::cout << "Result: " << std::endl << cross_product(u1, v1) << std::endl;
+    std::cout << "Result: " << std::endl << RED << cross_product(u1, v1) << RESET << std::endl;
 
     u1 = {4.0, 2.0, -3.0};
     v1 = {-2.0, -5.0, 16.0};
     std::cout << "vector u: " << std::endl << u1 << "vector v:" << std::endl << v1;
-    std::cout << "Result: " << std::endl << cross_product(u1, v1) << std::endl;
+    std::cout << "Result: " << std::endl << RED << cross_product(u1, v1) << RESET << std::endl;
 
 
     return 0;
