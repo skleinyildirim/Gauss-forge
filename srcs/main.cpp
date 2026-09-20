@@ -225,5 +225,24 @@ int main()
     std::cout << "Result: " << angle_cos(u1, v1) << std::endl;
     std::cout << std::endl;
 
+    std::cout << std::endl << BLUE << "ex06" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tCross product:" << RESET << std::endl;
+
+    u1 = {0.0, 0.0, 1.0};
+    v1 = {1.0, 0.0, 0.0};
+    std::cout << "vector u: " << std::endl << u1 << "vector v:" << std::endl << v1;
+    std::cout << "Result: " << std::endl << cross_product(u1, v1) << std::endl;
+
+    u1 = {1.0, 2.0, 3.0};
+    v1 = {4.0, 5.0, 6.0};
+    std::cout << "vector u: " << std::endl << u1 << "vector v:" << std::endl << v1;
+    std::cout << "Result: " << std::endl << cross_product(u1, v1) << std::endl;
+
+    u1 = {4.0, 2.0, -3.0};
+    v1 = {-2.0, -5.0, 16.0};
+    std::cout << "vector u: " << std::endl << u1 << "vector v:" << std::endl << v1;
+    std::cout << "Result: " << std::endl << cross_product(u1, v1) << std::endl;
+
+
     return 0;
 }
