@@ -190,5 +190,40 @@ int main()
     std::cout << "\t\tSupremum norm: " << a.norm_inf() << std::endl;
     std::cout << std::endl;
 
+    std::cout << std::endl << BLUE << "ex05" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tCosine:" << RESET << std::endl;
+
+    Vector<double> u({1.0, 0.0});
+    Vector<double> v({1.0, 0.0});
+
+    std::cout << "vector u: " << std::endl << u << "vector v:" << std::endl << v;
+    std::cout << "Result: " << angle_cos(u, v) << std::endl;
+    std::cout << std::endl;
+
+    v = {0.0, 1.0};
+    std::cout << "vector u: " << std::endl << u << "vector v:" << std::endl << v;
+    std::cout << "Result: " << angle_cos(u, v) << std::endl;
+    std::cout << std::endl;
+
+
+    u = {-1.0, 1.0};
+    v = {1.0, -1.0};
+    std::cout << "vector u: " << std::endl << u << "vector v:" << std::endl << v;
+    std::cout << "Result: " << angle_cos(u, v) << std::endl;
+    std::cout << std::endl;
+
+
+    u = {2.0, 1.0};
+    v = {4.0, 2.0};
+    std::cout << "vector u: " << std::endl << u << "vector v:" << std::endl << v;
+    std::cout << "Result: " << angle_cos(u, v) << std::endl;
+    std::cout << std::endl;
+
+    Vector<double> u1({1.0, 2.0, 3.0});
+    Vector<double> v1({4.0, 5.0, 6.0});
+    std::cout << "vector u: " << std::endl << u1 << "vector v:" << std::endl << v1;
+    std::cout << "Result: " << angle_cos(u1, v1) << std::endl;
+    std::cout << std::endl;
+
     return 0;
 }
