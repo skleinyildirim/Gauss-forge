@@ -118,3 +118,33 @@ K Vector<K>::dot(const Vector<K>& v) const {
     return (result);
 }
 
+//ex04
+template <typename K>
+double Vector<K>::norm_1() const {
+    double result = 0;
+    double abs = 0;
+    for (size_t i = 0; i < getSize(); i++) {
+        abs = _vector[i] < 0 ? -_vector[i] :_vector[i];
+        result += abs;
+    }
+    return (result);
+}
+
+template <typename K>
+double Vector<K>::norm() const {
+    double result = std::pow(dot(*this), 0.5);
+    return (result);
+}
+
+template <typename K>
+double Vector<K>::norm_inf() const {
+    double max = 0;
+    double abs = 0;
+    for (size_t i = 0; i < getSize(); i++) {
+        abs = _vector[i] < 0 ? -_vector[i] :_vector[i];
+        if (abs > max) {
+            max = abs;
+        }
+    }
+    return (max);
+}

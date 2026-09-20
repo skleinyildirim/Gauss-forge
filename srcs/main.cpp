@@ -160,5 +160,35 @@ int main()
     std::cout << "vector a: " << std::endl << a << "vector b:" << std::endl << b;
     std::cout << "result : " << a.dot(b) << std::endl;
 
+
+    std::cout << std::endl << BLUE << "ex04" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tNorm:" << RESET << std::endl;
+
+    Vector<double> c({0.0, 0.0, 0.0});
+
+    std::cout << "vector c: " << std::endl << c << std::endl;
+    std::cout << "result : " << std::endl;
+    std::cout << "\t\tManhattan norm: " << c.norm_1() << std::endl;
+    std::cout << "\t\tEuclidean norm: " << c.norm() << std::endl;
+    std::cout << "\t\tSupremum norm: " << c.norm_inf() << std::endl;
+    std::cout << std::endl;
+
+    c = {1.0, 2.0, 3.0};
+    std::cout << "vector c: " << std::endl << c << std::endl;
+    std::cout << "result : " << std::endl;
+    std::cout << "\t\tManhattan norm: " << c.norm_1() << std::endl;
+    std::cout << "\t\tEuclidean norm: " << c.norm() << std::endl;
+    std::cout << "\t\tSupremum norm: " << c.norm_inf() << std::endl;
+    std::cout << std::endl;
+
+    
+    a = {-1.0, -2.0};
+    std::cout << "vector a: " << std::endl << a << std::endl;
+    std::cout << "result : " << std::endl;
+    std::cout << "\t\tManhattan norm: " << a.norm_1() << std::endl;
+    std::cout << "\t\tEuclidean norm: " << a.norm() << std::endl;
+    std::cout << "\t\tSupremum norm: " << a.norm_inf() << std::endl;
+    std::cout << std::endl;
+
     return 0;
 }

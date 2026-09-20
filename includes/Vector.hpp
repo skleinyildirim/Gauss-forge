@@ -31,6 +31,12 @@ class Vector
         //ex03
         K dot(const Vector<K>& v) const;
 
+        //ex04
+        double norm_1() const;
+        double norm() const;
+        double norm_inf() const;
+
+
 };
 
 template <typename K>
