@@ -167,3 +167,13 @@ Matrix<K> Matrix<K>::mul_mat(const Matrix<K>& mat) const {
     }
     return (result);
 }
+
+template <typename K>
+K Matrix<K>::trace() const {
+    assert(getNumberCols() == getNumberRows());
+    K result = 0;
+    for (size_t i = 0; i < getNumberRows(); i++) {
+        result += _matrix[i][i];
+    }
+    return (result);
+}

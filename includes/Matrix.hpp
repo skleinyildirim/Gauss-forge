@@ -37,6 +37,9 @@ class Matrix
         Vector<K> mul_vec(const Vector<K>& vec) const;
         Matrix<K> mul_mat(const Matrix<K>& mat) const;
 
+        //ex08
+        K trace() const;
+
 };
 
 template <typename K>

@@ -283,5 +283,21 @@ int main()
     std::cout << "matrix a: " << std::endl << mat_a;
     std::cout << "matrix b: " << std::endl << mat_b;
     std::cout << "Result: " << std::endl << RED << mat_a.mul_mat(mat_b) << RESET << std::endl;
+    
+    std::cout << std::endl << BLUE << "ex08" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tTrace: " << RESET << std::endl;
+
+    mat_a = {{1.0, 0.0}, {0.0, 1.0}};
+    std::cout << "matrix a: " << std::endl << mat_a;
+    std::cout << "Result: " << std::endl << RED << mat_a.trace() << RESET << std::endl;
+
+    Matrix<double> mat_c({{2.0, -5.0, 0.0}, {4.0, 3.0, 7.0}, {-2.0, 3.0, 4.0}});
+    std::cout << "matrix c: " << std::endl << mat_c;
+    std::cout << "Result: " << std::endl << RED << mat_c.trace() << RESET << std::endl;
+
+    mat_c = {{-2.0, -8.0, 4.0}, {1.0, -23.0, 4.0}, {0.0, 6.0, 4.0}};
+    std::cout << "matrix c: " << std::endl << mat_c;
+    std::cout << "Result: " << std::endl << RED << mat_c.trace() << RESET << std::endl;
+
     return 0;
 }
