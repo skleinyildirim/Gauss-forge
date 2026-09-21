@@ -43,6 +43,9 @@ class Matrix
         //ex09
         Matrix<K> transpose() const;
 
+        //ex10
+        Matrix<K> row_echelon() const;
+
 };
 
 template <typename K>

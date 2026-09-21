@@ -304,5 +304,25 @@ int main()
 
     std::cout << "matrix c: " << std::endl << mat_c;
     std::cout << "Result: " << std::endl << RED << mat_c.transpose() << RESET << std::endl;
+
+    std::cout << std::endl << BLUE << "ex10" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tRow-echelon form: " << RESET << std::endl;
+
+    mat_c = {{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+    std::cout << "matrix c: " << std::endl << mat_c;
+    std::cout << "Result: " << std::endl << RED << mat_c.row_echelon() << RESET << std::endl;
+
+    mat_a = {{1.0, 2.0}, {3.0, 4.0}};
+    std::cout << "matrix a: " << std::endl << mat_a;
+    std::cout << "Result: " << std::endl << RED << mat_a.row_echelon() << RESET << std::endl;
+
+    mat_a = {{1.0, 2.0}, {2.0, 4.0}};
+    std::cout << "matrix a: " << std::endl << mat_a;
+    std::cout << "Result: " << std::endl << RED << mat_a.row_echelon() << RESET << std::endl;
+
+    Matrix<double> mat_d({{8.0, 5.0, -2.0, 4.0, 28.0}, {4.0, 2.5, 20.0, 4.0, -4.0}, {8.0, 5.0, 1.0, 4.0, 17.0}});
+    std::cout << "matrix c: " << std::endl << mat_d;
+    std::cout << "Result: " << std::endl << RED << mat_d.row_echelon() << RESET << std::endl;
+
     return 0;
 }

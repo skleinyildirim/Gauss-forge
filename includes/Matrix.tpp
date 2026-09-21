@@ -190,3 +190,39 @@ Matrix<K> Matrix<K>::transpose() const {
     }
     return (result);
 }
+
+//ex10
+template <typename K>
+Matrix<K> Matrix<K>::row_echelon() const {
+    size_t pivot_row = 0;
+    Matrix<K> result(*this);
+    for (size_t i = 0; i < getNumberCols(); i++) {
+        for (size_t j = pivot_row; j < getNumberRows(); j++) {
+            if (result._matrix[j][i] != 0) {
+                std::swap(result._matrix[pivot_row], result._matrix[j]);
+                K pivotValue = result._matrix[pivot_row][i];   // on sauvegarde AVANT de modifier
+                for (size_t k = 0; k < getNumberCols(); k++) {
+                    result._matrix[pivot_row][k] /= pivotValue;
+                }
+                for (size_t r = 0; r < getNumberRows(); r++) {
+                    if (r == pivot_row)
+                        continue;
+                    K factor = result._matrix[r][i];
+                    for (size_t k = 0; k < getNumberCols(); k++) {
+                        result._matrix[r][k] -= factor * result._matrix[pivot_row][k];
+                    }
+                }
+                pivot_row++;
+                break ;
+            }
+        }
+
+    }
+    for (size_t i = 0; i < getNumberRows(); i++) {
+        for (size_t j = 0; j < getNumberCols(); j++) {
+            if (result._matrix[i][j] == 0)
+                result._matrix[i][j] = 0;
+        }
+    }
+    return (result);
+}
