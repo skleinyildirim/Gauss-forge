@@ -40,6 +40,9 @@ class Matrix
         //ex08
         K trace() const;
 
+        //ex09
+        Matrix<K> transpose() const;
+
 };
 
 template <typename K>

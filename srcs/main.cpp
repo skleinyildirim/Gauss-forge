@@ -299,5 +299,10 @@ int main()
     std::cout << "matrix c: " << std::endl << mat_c;
     std::cout << "Result: " << std::endl << RED << mat_c.trace() << RESET << std::endl;
 
+    std::cout << std::endl << BLUE << "ex09" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tTranspose: " << RESET << std::endl;
+
+    std::cout << "matrix c: " << std::endl << mat_c;
+    std::cout << "Result: " << std::endl << RED << mat_c.transpose() << RESET << std::endl;
     return 0;
 }

@@ -168,12 +168,25 @@ Matrix<K> Matrix<K>::mul_mat(const Matrix<K>& mat) const {
     return (result);
 }
 
+//ex08
 template <typename K>
 K Matrix<K>::trace() const {
     assert(getNumberCols() == getNumberRows());
     K result = 0;
     for (size_t i = 0; i < getNumberRows(); i++) {
         result += _matrix[i][i];
+    }
+    return (result);
+}
+
+//ex09
+template <typename K>
+Matrix<K> Matrix<K>::transpose() const {
+    Matrix<K> result(getNumberCols(), getNumberRows());
+    for (size_t i = 0; i < getNumberRows(); i++) {
+        for (size_t j = 0; j < getNumberCols(); j++) {
+            result._matrix[j][i] = _matrix[i][j];
+        }
     }
     return (result);
 }
