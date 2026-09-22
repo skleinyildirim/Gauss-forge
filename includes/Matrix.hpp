@@ -12,6 +12,7 @@ class Matrix
 {
     private:
         std::vector<std::vector<K>> _matrix;
+        Matrix<K> getMinor(size_t rowToRemove, size_t colToRemove) const;
     public:
         Matrix();
         Matrix(const std::vector<std::vector<K>> &values);
@@ -45,6 +46,9 @@ class Matrix
 
         //ex10
         Matrix<K> row_echelon() const;
+
+        //ex11
+        K determinant() const;
 
 };
 
