@@ -263,3 +263,28 @@ K Matrix<K>::determinant() const {
     }
     return (sum);
 }
+
+//ex12
+template <typename K>
+Matrix<K> Matrix<K>::inverse() const {
+    if (determinant() == 0)
+        throw std::domain_error("Matrix is singular, cannot invert");
+    Matrix<K> identity(getNumberRows(), getNumberRows());
+    for (size_t i = 0; i < getNumberRows(); i++) {
+        identity._matrix[i][i] = 1;
+    }
+    Matrix<K> result(getNumberRows(), getNumberCols() + identity.getNumberCols());
+    for (size_t i = 0; i < getNumberRows(); i++) {
+        for (size_t j = 0; j < getNumberCols(); j++)
+            result._matrix[i][j] = _matrix[i][j];
+        for (size_t j = 0; j < identity.getNumberCols(); j++)
+            result._matrix[i][getNumberCols() + j] = identity._matrix[i][j];
+    }
+    Matrix<K> row_result = result.row_echelon();
+    for (size_t i = 0; i < identity.getNumberRows(); i++) {
+        for (size_t j = 0; j < identity.getNumberCols(); j++) {
+            identity._matrix[i][j] = row_result._matrix[i][getNumberCols() + j];
+        }
+    }
+    return (identity);
+}

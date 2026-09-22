@@ -4,7 +4,7 @@
 #include <cassert>
 #include <utility>
 #include "Vector.hpp"
-
+#include <stdexcept>
 //verifier si la matrice donnee dans le constructeur a le meme nombre de colonnes sur toutes les lignes 
 
 template <typename K>
@@ -49,6 +49,9 @@ class Matrix
 
         //ex11
         K determinant() const;
+
+        //ex12
+        Matrix<K> inverse() const;
 
 };
 

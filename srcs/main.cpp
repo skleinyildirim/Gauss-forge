@@ -342,5 +342,33 @@ int main()
     Matrix<double> mat_e({{8.0, 5.0, -2.0, 4.0}, {4.0, 2.5, 20.0, 4.0}, {8.0, 5.0, 1.0, 4.0}, {28.0, -4.0, 17.0, 1.0}});
     std::cout << "matrix e: " << std::endl << mat_e;
     std::cout << "Result: " << std::endl << RED << mat_e.determinant() << RESET << std::endl;
+
+    {
+        std::cout << std::endl << BLUE << "ex12" << RESET << std::endl;
+        std::cout << std::endl << MAGENTA << "\t\tInverse: " << RESET << std::endl;
+
+        try {
+            Matrix<double> mat_u({{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}});
+            std::cout << "matrix u: " << std::endl << mat_u;
+            std::cout << "Result: " << std::endl << RED << mat_u.inverse() << RESET << std::endl;
+            
+            mat_u = {{2.0, 0.0, 0.0}, {0.0, 2.0, 0.0}, {0.0, 0.0, 2.0}};
+            std::cout << "matrix u: " << std::endl << mat_u;
+            std::cout << "Result: " << std::endl << RED << mat_u.inverse() << RESET << std::endl;
+
+            mat_u = {{8.0, 5.0, -2.0}, {4.0, 7.0, 20.0}, {7.0, 6.0, 1.0}};
+            std::cout << "matrix u: " << std::endl << mat_u;
+            std::cout << "Result: " << std::endl << RED << mat_u.inverse() << RESET << std::endl;
+
+            std::cout << std::endl << MAGENTA << "\tsingular matrix: " << RESET << std::endl;
+            Matrix<double> mat_v({{1.0, -1.0}, {-1.0, 1.0}});
+            std::cout << "matrix v: " << std::endl << mat_v;
+            std::cout << "Result: " << std::endl << RED << mat_v.inverse() << RESET << std::endl;
+            
+        }
+        catch (const std::exception& e) {
+            std::cout << "Error : " << e.what() << std::endl;
+        }
+    }
     return 0;
 }
