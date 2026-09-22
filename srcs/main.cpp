@@ -324,5 +324,23 @@ int main()
     std::cout << "matrix c: " << std::endl << mat_d;
     std::cout << "Result: " << std::endl << RED << mat_d.row_echelon() << RESET << std::endl;
 
+    std::cout << std::endl << BLUE << "ex11" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tDeterminant: " << RESET << std::endl;
+
+    mat_a = {{1.0, -1.0}, {-1.0, 1.0}};
+    std::cout << "matrix a: " << std::endl << mat_a;
+    std::cout << "Result: " << std::endl << RED << mat_a.determinant() << RESET << std::endl;
+
+    mat_c = {{2.0, 0.0, 0.0}, {0.0, 2.0, 0.0}, {0.0, 0.0, 2.0}};
+    std::cout << "matrix c: " << std::endl << mat_c;
+    std::cout << "Result: " << std::endl << RED << mat_c.determinant() << RESET << std::endl;
+
+    mat_c = {{8.0, 5.0, -2.0}, {4.0, 7.0, 20.0}, {7.0, 6.0, 1.0}};
+    std::cout << "matrix c: " << std::endl << mat_c;
+    std::cout << "Result: " << std::endl << RED << mat_c.determinant() << RESET << std::endl;
+
+    Matrix<double> mat_e({{8.0, 5.0, -2.0, 4.0}, {4.0, 2.5, 20.0, 4.0}, {8.0, 5.0, 1.0, 4.0}, {28.0, -4.0, 17.0, 1.0}});
+    std::cout << "matrix e: " << std::endl << mat_e;
+    std::cout << "Result: " << std::endl << RED << mat_e.determinant() << RESET << std::endl;
     return 0;
 }

@@ -250,5 +250,16 @@ Matrix<K> Matrix<K>::getMinor(size_t rowToRemove, size_t colToRemove) const{
 
 template <typename K>
 K Matrix<K>::determinant() const {
-    
+    if (getNumberCols() == 1 && getNumberRows() == 1)
+        return (_matrix[0][0]);
+    K sum = 0;
+    int sign = 0;
+    for (size_t j = 0; j < getNumberCols(); j++) {
+        if (j % 2 == 0)
+            sign = 1;
+        else
+            sign = -1;
+        sum += sign * _matrix[0][j] * getMinor(0, j).determinant();
+    }
+    return (sum);
 }
