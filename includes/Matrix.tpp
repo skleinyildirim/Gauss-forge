@@ -288,3 +288,20 @@ Matrix<K> Matrix<K>::inverse() const {
     }
     return (identity);
 }
+
+
+//ex13
+template <typename K>
+size_t Matrix<K>::rank() const {
+    Matrix<K> row_result = row_echelon();
+    size_t result = 0;
+    for (size_t i = 0; i < row_result.getNumberRows(); i++) {
+        for (size_t j = 0; j < row_result.getNumberCols(); j++) {
+            if (row_result._matrix[i][j] != 0) {
+                result++;
+                break ;
+            }
+        }
+    }
+    return (result);
+}

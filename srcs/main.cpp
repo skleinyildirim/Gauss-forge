@@ -370,5 +370,20 @@ int main()
             std::cout << "Error : " << e.what() << std::endl;
         }
     }
+
+    std::cout << std::endl << BLUE << "ex13" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tRank: " << RESET << std::endl;
+
+    mat_c = {{1.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+    std::cout << "matrix c: " << std::endl << mat_c;
+    std::cout << "Result: " << std::endl << RED << mat_c.rank() << RESET << std::endl;
+
+    Matrix<double> mat_f({{1.0, 2.0, 0.0, 0.0}, {2.0, 4.0, 0.0, 0.0}, {-1.0, 2.0, 1.0, 1.0}});
+    std::cout << "matrix f: " << std::endl << mat_f;
+    std::cout << "Result: " << std::endl << RED << mat_f.rank() << RESET << std::endl;
+
+    Matrix<double> mat_g({{8.0, 5.0, -2.0}, {4.0, 7.0, 20.0}, {7.0, 6.0, 1.0}, {21.0, 18.0, 7.0}});
+    std::cout << "matrix f: " << std::endl << mat_g;
+    std::cout << "Result: " << std::endl << RED << mat_g.rank() << RESET << std::endl;
     return 0;
 }

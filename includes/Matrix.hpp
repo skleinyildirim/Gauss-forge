@@ -53,6 +53,9 @@ class Matrix
         //ex12
         Matrix<K> inverse() const;
 
+        //ex13
+        size_t rank() const;
+
 };
 
 template <typename K>
