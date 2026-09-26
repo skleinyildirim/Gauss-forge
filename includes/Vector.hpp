@@ -4,6 +4,7 @@
 #include <utility>
 #include <cassert>
 #include <cmath>
+#include "Complex.hpp"
 
 template <typename K>
 class Vector
@@ -46,5 +47,16 @@ std::ostream& operator<<(std::ostream& out, const Vector<K>& v);
 template <typename K>
 Vector<K> linear_combination(const std::vector<Vector<K>>& u, const std::vector<K>& coefs);
 
+template <typename T>
+T conj_helper(const T& x);
+
+template <typename T>
+double pow_helper(const T& x, double exponent);
+
+template <typename T>
+double to_real_helper(const T& x);
+
+template <typename T>
+T abs_helper(const T& x);
 
 #include "Vector.tpp"

@@ -97,10 +97,11 @@ void Vector<K>::scl(K a) {
 template <typename K>
 Vector<K> linear_combination(const std::vector<Vector<K>>& u, const std::vector<K>& coefs) {
     std::vector<K> result(u[0].getSize(), K());
+    using std::fma;
     for (size_t i = 0; i < u.size(); i++) {
         const std::vector<K>& vect = u[i].getVector();
         for (size_t j = 0; j < u[i].getSize(); j++) {
-            result[j] = std::fma(coefs[i], vect[j], result[j]);
+            result[j] = fma(coefs[i], vect[j], result[j]);
         }
     }
     Vector<K> r(result);
@@ -112,11 +113,13 @@ template <typename K>
 K Vector<K>::dot(const Vector<K>& v) const {
     assert(getSize() == v.getSize());
     K result = K();
+    using std::fma;
     for (size_t i = 0; i < getSize(); i++){
-        result = std::fma(_vector[i], v._vector[i], result);
+        result = fma(_vector[i], conj_helper(v._vector[i]), result);
     }
     return (result);
 }
+
 
 //ex04
 template <typename K>
@@ -124,7 +127,7 @@ double Vector<K>::norm_1() const {
     double result = 0;
     double abs = 0;
     for (size_t i = 0; i < getSize(); i++) {
-        abs = _vector[i] < 0 ? -_vector[i] :_vector[i];
+        abs = abs_helper(_vector[i]);
         result += abs;
     }
     return (result);
@@ -132,7 +135,7 @@ double Vector<K>::norm_1() const {
 
 template <typename K>
 double Vector<K>::norm() const {
-    double result = std::pow(dot(*this), 0.5);
+    double result = pow_helper(dot(*this), 0.5);
     return (result);
 }
 
@@ -141,10 +144,31 @@ double Vector<K>::norm_inf() const {
     double max = 0;
     double abs = 0;
     for (size_t i = 0; i < getSize(); i++) {
-        abs = _vector[i] < 0 ? -_vector[i] :_vector[i];
+        abs = abs_helper(_vector[i]);
         if (abs > max) {
             max = abs;
         }
     }
     return (max);
+}
+
+template <typename T>
+T conj_helper(const T& x) { 
+    return (x);
+}
+
+template <typename T>
+double pow_helper(const T& x, double exponent) {
+    using std::pow;
+    return pow(x, exponent);
+}
+
+template <typename T>
+double to_real_helper(const T& x) { 
+    return (x);
+}
+
+template <typename T>
+T abs_helper(const T& x) {
+    return (x < 0 ? -x : x);
 }

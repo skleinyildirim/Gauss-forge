@@ -1,5 +1,6 @@
 #include "Matrix.hpp"
 #include "Vector.hpp"
+#include "Complex.hpp"
 #include "LinearAlgebra.hpp"
 #include "Colors.hpp"
 #include <fstream>
@@ -405,6 +406,128 @@ int main()
         file << std::endl;
     }
     file.close();
+
+    std::cout << std::endl << BLUE << "ex15" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tComplex vector spaces: " << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tVector<Complex> - construction/affichage:" << RESET << std::endl;
+
+    Vector<Complex> cv1({Complex(2.0, 3.0), Complex(4.0, 8.0)});
+    std::cout << cv1;
+    std::cout << "size: " << cv1.getSize() << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tVector<Complex> - add/sub/scl:" << RESET << std::endl;
+
+    Vector<Complex> cv2({Complex(1.0, 1.0), Complex(2.0, -1.0)});
+    std::cout << "u:" << std::endl << cv1 << "v:" << std::endl << cv2;
+
+    Vector<Complex> cvAdd(cv1);
+    cvAdd.add(cv2);
+    std::cout << "add:" << std::endl << RED << cvAdd << RESET;
+
+    Vector<Complex> cvSub(cv1);
+    cvSub.sub(cv2);
+    std::cout << "sub:" << std::endl << RED << cvSub << RESET;
+
+    Vector<Complex> cvScl(cv1);
+    cvScl.scl(Complex(2.0, 0.0));
+    std::cout << "scl:" << std::endl << RED << cvScl << RESET;
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix<Complex> - construction/affichage:" << RESET << std::endl;
+
+    Matrix<Complex> cm1({
+        {Complex(1.0, 1.0), Complex(2.0, 0.0)},
+        {Complex(0.0, -1.0), Complex(3.0, 2.0)}
+    });
+    std::cout << cm1;
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix<Complex> - add/sub/scl:" << RESET << std::endl;
+
+    Matrix<Complex> cm2({
+        {Complex(1.0, 0.0), Complex(0.0, 1.0)},
+        {Complex(1.0, 1.0), Complex(2.0, -2.0)}
+    });
+    std::cout << "a:" << std::endl << cm1 << "b:" << std::endl << cm2;
+
+    Matrix<Complex> cmAdd(cm1);
+    cmAdd.add(cm2);
+    std::cout << "add:" << std::endl << RED << cmAdd << RESET;
+
+    Matrix<Complex> cmSub(cm1);
+    cmSub.sub(cm2);
+    std::cout << "sub:" << std::endl << RED << cmSub << RESET;
+
+    Matrix<Complex> cmScl(cm1);
+    cmScl.scl(Complex(0.0, 1.0));
+    std::cout << "scl:" << std::endl << RED << cmScl << RESET;
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix<Complex> - mul_mat:" << RESET << std::endl;
+    std::cout << "Result:" << std::endl << RED << cm1.mul_mat(cm2) << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix<Complex> - transpose:" << RESET << std::endl;
+    std::cout << RED << cm1.transpose() << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tVector<Complex> - dot (via fma) :" << RESET << std::endl;
+    std::cout << "u:" << std::endl << cv1 << "v:" << std::endl << cv2;
+    std::cout << "Result: " << RED << cv1.dot(cv2) << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tlinear_combination<Complex> (via fma) :" << RESET << std::endl;
+    std::vector<Vector<Complex>> cVecs = {cv1, cv2};
+    std::vector<Complex> cCoefs = {Complex(2.0, 0.0), Complex(0.0, 1.0)};
+    Vector<Complex> combC = linear_combination(cVecs, cCoefs);
+    std::cout << RED << combC << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix<Complex> - mul_vec (via dot/fma) :" << RESET << std::endl;
+    std::cout << "matrix a:" << std::endl << cm1;
+    std::cout << "vector u:" << std::endl << cv1;
+    std::cout << "Result: " << std::endl << RED << cm1.mul_vec(cv1) << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tVector<Complex> - norm (via pow_helper) :" << RESET << std::endl;
+    std::cout << "u:" << std::endl << cv1;
+    std::cout << "Result: " << RED << cv1.norm() << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tVector<Complex> - norm_1 / norm_inf (via abs_helper) :" << RESET << std::endl;
+    std::cout << "u:" << std::endl << cv1;
+    std::cout << "norm_1: " << RED << cv1.norm_1() << RESET << std::endl;      // attendu: |2+3i| + |4+8i| = sqrt(13)+sqrt(80) ~ 12.5499
+    std::cout << "norm_inf: " << RED << cv1.norm_inf() << RESET << std::endl; // attendu: max(sqrt(13), sqrt(80)) ~ 8.9443
+
+    std::cout << std::endl << MAGENTA << "\t\tangle_cos<Complex> (via to_real_helper) :" << RESET << std::endl;
+    std::cout << "u:" << std::endl << cv1 << "v:" << std::endl << cv2;
+    std::cout << "Result: " << RED << angle_cos(cv1, cv2) << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tlerp<Vector<Complex>> :" << RESET << std::endl;
+    std::cout << "u:" << std::endl << cv1 << "v:" << std::endl << cv2;
+    std::cout << "Result (t=0.5): " << std::endl << RED << lerp(cv1, cv2, 0.5) << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tcross_product<Complex> :" << RESET << std::endl;
+    Vector<Complex> ce1({Complex(0.0), Complex(0.0), Complex(1.0)});
+    Vector<Complex> ce2({Complex(1.0), Complex(0.0), Complex(0.0)});
+    std::cout << "u:" << std::endl << ce1 << "v:" << std::endl << ce2;
+    std::cout << "Result: " << std::endl << RED << cross_product(ce1, ce2) << RESET << std::endl;   // attendu: [0, 1, 0]
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix<Complex> - trace :" << RESET << std::endl;
+    std::cout << "a:" << std::endl << cm1;
+    std::cout << "Result: " << RED << cm1.trace() << RESET << std::endl;   // attendu: (1+1i)+(3+2i) = 4+3i
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix<Complex> - row_echelon :" << RESET << std::endl;
+    std::cout << "a:" << std::endl << cm1;
+    std::cout << "Result:" << std::endl << RED << cm1.row_echelon() << RESET << std::endl;
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix<Complex> - determinant :" << RESET << std::endl;
+    std::cout << "a:" << std::endl << cm1;
+    std::cout << "Result: " << RED << cm1.determinant() << RESET << std::endl;   // attendu: 1 + 7i
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix<Complex> - inverse :" << RESET << std::endl;
+    try {
+        std::cout << "a:" << std::endl << cm1;
+        std::cout << "Result:" << std::endl << RED << cm1.inverse() << RESET << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "Error : " << e.what() << std::endl;
+    }
+
+    std::cout << std::endl << MAGENTA << "\t\tMatrix<Complex> - rank :" << RESET << std::endl;
+    std::cout << "a:" << std::endl << cm1;
+    std::cout << "Result: " << RED << cm1.rank() << RESET << std::endl;
 
     return 0;
 }

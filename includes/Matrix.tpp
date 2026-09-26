@@ -259,7 +259,7 @@ K Matrix<K>::determinant() const {
             sign = 1;
         else
             sign = -1;
-        sum += sign * _matrix[0][j] * getMinor(0, j).determinant();
+        sum += _matrix[0][j] * sign * getMinor(0, j).determinant();
     }
     return (sum);
 }
