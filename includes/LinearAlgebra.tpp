@@ -25,3 +25,18 @@ Vector<K> cross_product(const Vector<K>& u, const Vector<K>& v) {
     Vector<K> result(res);
     return (result);
 }
+
+//ex14
+template <typename K>
+Matrix<K> projection(K fov, K ratio, K near, K far) {
+    std::vector<std::vector<K>> data(4, std::vector<K>(4, K()));
+
+    K scale = 1 / std::tan(fov / 2);
+    data[0][0] = - (scale / ratio);
+    data[1][1] = scale;
+    data[2][2] = far / (far - near);
+    data[2][3] = -(far * near) / (far - near);
+    data[3][2] = 1;
+
+    return (Matrix<K>(data));
+}

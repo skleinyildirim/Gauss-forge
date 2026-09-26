@@ -2,6 +2,7 @@
 #include "Vector.hpp"
 #include "LinearAlgebra.hpp"
 #include "Colors.hpp"
+#include <fstream>
 
 int main()
 {
@@ -385,5 +386,25 @@ int main()
     Matrix<double> mat_g({{8.0, 5.0, -2.0}, {4.0, 7.0, 20.0}, {7.0, 6.0, 1.0}, {21.0, 18.0, 7.0}});
     std::cout << "matrix f: " << std::endl << mat_g;
     std::cout << "Result: " << std::endl << RED << mat_g.rank() << RESET << std::endl;
+    
+    std::cout << std::endl << BLUE << "ex14" << RESET << std::endl;
+    std::cout << std::endl << MAGENTA << "\t\tProjection matrix: " << RESET << std::endl;
+    Matrix<double> proj = projection(1.0472, 16.0/9.0, 1.0, 100.0);   // fov ~60° en radians
+    std::cout << proj;
+
+    Matrix<double> projT = proj.transpose();
+    const std::vector<std::vector<double>>& projTData = projT.getMatrix();
+
+    std::ofstream file("proj");
+    for (size_t i = 0; i < projT.getNumberRows(); i++) {
+        for (size_t j = 0; j < projT.getNumberCols(); j++) {
+            file << projTData[i][j];
+            if (j != projT.getNumberCols() - 1)
+                file << ", ";
+        }
+        file << std::endl;
+    }
+    file.close();
+
     return 0;
 }

@@ -15,4 +15,8 @@ double angle_cos(const Vector<K>& u, const Vector<K>& v);
 template <typename K>
 Vector<K> cross_product(const Vector<K>& u, const Vector<K>& v);
 
+//ex14
+template <typename K>
+Matrix<K> projection(K fov, K ratio, K near, K far);
+
 #include "LinearAlgebra.tpp"
