@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowAxis" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#333333"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="340" height="260" fill="#ffffff"/>
+
+  <!-- grid -->
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="30" y1="230" x2="30" y2="20"/>
+    <line x1="75" y1="230" x2="75" y2="20"/>
+    <line x1="120" y1="230" x2="120" y2="20"/>
+    <line x1="165" y1="230" x2="165" y2="20"/>
+    <line x1="210" y1="230" x2="210" y2="20"/>
+    <line x1="255" y1="230" x2="255" y2="20"/>
+    <line x1="300" y1="230" x2="300" y2="20"/>
+    <line x1="30" y1="230" x2="320" y2="230"/>
+    <line x1="30" y1="185" x2="320" y2="185"/>
+    <line x1="30" y1="140" x2="320" y2="140"/>
+    <line x1="30" y1="95" x2="320" y2="95"/>
+    <line x1="30" y1="50" x2="320" y2="50"/>
+  </g>
+
+  <!-- axis ticks labels -->
+  <g fill="#6b7280" font-size="11">
+    <text x="73" y="245" text-anchor="middle">1</text>
+    <text x="118" y="245" text-anchor="middle">2</text>
+    <text x="163" y="245" text-anchor="middle">3</text>
+    <text x="208" y="245" text-anchor="middle">4</text>
+    <text x="253" y="245" text-anchor="middle">5</text>
+    <text x="18" y="189" text-anchor="middle">1</text>
+    <text x="18" y="144" text-anchor="middle">2</text>
+    <text x="18" y="99" text-anchor="middle">3</text>
+    <text x="18" y="54" text-anchor="middle">4</text>
+  </g>
+
+  <!-- axes -->
+  <line x1="30" y1="230" x2="325" y2="230" stroke="#333333" stroke-width="2" marker-end="url(#arrowAxis)"/>
+  <line x1="30" y1="230" x2="30" y2="15" stroke="#333333" stroke-width="2" marker-end="url(#arrowAxis)"/>
+  <text x="330" y="234" fill="#333333" font-size="13">x</text>
+  <text x="22" y="14" fill="#333333" font-size="13">y</text>
+  <text x="14" y="242" fill="#6b7280" font-size="11">0</text>
+
+  <!-- vector v = (4,3) -->
+  <line x1="30" y1="230" x2="205" y2="98" stroke="#2563eb" stroke-width="3" marker-end="url(#arrowBlue)"/>
+  <circle cx="30" cy="230" r="3" fill="#333333"/>
+  <text x="222" y="90" fill="#2563eb" font-size="15" font-weight="bold">v = (4, 3)</text>
+
+  <!-- dashed projection lines -->
+  <line x1="210" y1="230" x2="210" y2="95" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="30" y1="95" x2="210" y2="95" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4,3"/>
+</svg>

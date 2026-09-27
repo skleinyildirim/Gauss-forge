@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 260" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrowBlue2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowGreen2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrowAxis2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#333333"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="780" height="260" fill="#ffffff"/>
+
+  <!-- ===== LEFT PANEL : before ===== -->
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="30" y1="230" x2="30" y2="20"/>
+    <line x1="68" y1="230" x2="68" y2="20"/>
+    <line x1="106" y1="230" x2="106" y2="20"/>
+    <line x1="144" y1="230" x2="144" y2="20"/>
+    <line x1="182" y1="230" x2="182" y2="20"/>
+    <line x1="220" y1="230" x2="220" y2="20"/>
+    <line x1="258" y1="230" x2="258" y2="20"/>
+    <line x1="30" y1="230" x2="270" y2="230"/>
+    <line x1="30" y1="192" x2="270" y2="192"/>
+    <line x1="30" y1="154" x2="270" y2="154"/>
+    <line x1="30" y1="116" x2="270" y2="116"/>
+    <line x1="30" y1="78" x2="270" y2="78"/>
+  </g>
+  <line x1="30" y1="230" x2="272" y2="230" stroke="#333333" stroke-width="2" marker-end="url(#arrowAxis2)"/>
+  <line x1="30" y1="230" x2="30" y2="15" stroke="#333333" stroke-width="2" marker-end="url(#arrowAxis2)"/>
+
+  <line x1="30" y1="230" x2="177" y2="119" stroke="#2563eb" stroke-width="3" marker-end="url(#arrowBlue2)"/>
+  <text x="145" y="105" fill="#2563eb" font-size="14" font-weight="bold">v = (4, 3)</text>
+  <text x="120" y="255" fill="#374151" font-size="13" font-weight="bold">before</text>
+
+  <!-- ===== ARROW + MATRIX LABEL ===== -->
+  <line x1="292" y1="125" x2="410" y2="125" stroke="#111827" stroke-width="2" marker-end="url(#arrowAxis2)"/>
+  <text x="308" y="105" fill="#111827" font-size="15" font-weight="bold">A</text>
+  <text x="280" y="150" fill="#6b7280" font-size="12">A = [ [2,0], [0,1] ]</text>
+
+  <!-- ===== RIGHT PANEL : after ===== -->
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="430" y1="230" x2="430" y2="20"/>
+    <line x1="468" y1="230" x2="468" y2="20"/>
+    <line x1="506" y1="230" x2="506" y2="20"/>
+    <line x1="544" y1="230" x2="544" y2="20"/>
+    <line x1="582" y1="230" x2="582" y2="20"/>
+    <line x1="620" y1="230" x2="620" y2="20"/>
+    <line x1="658" y1="230" x2="658" y2="20"/>
+    <line x1="696" y1="230" x2="696" y2="20"/>
+    <line x1="734" y1="230" x2="734" y2="20"/>
+    <line x1="430" y1="230" x2="746" y2="230"/>
+    <line x1="430" y1="192" x2="746" y2="192"/>
+    <line x1="430" y1="154" x2="746" y2="154"/>
+    <line x1="430" y1="116" x2="746" y2="116"/>
+    <line x1="430" y1="78" x2="746" y2="78"/>
+  </g>
+  <line x1="430" y1="230" x2="750" y2="230" stroke="#333333" stroke-width="2" marker-end="url(#arrowAxis2)"/>
+  <line x1="430" y1="230" x2="430" y2="15" stroke="#333333" stroke-width="2" marker-end="url(#arrowAxis2)"/>
+
+  <!-- faint original vector for comparison -->
+  <line x1="430" y1="230" x2="577" y2="119" stroke="#93c5fd" stroke-width="2" stroke-dasharray="5,4"/>
+
+  <line x1="430" y1="230" x2="729" y2="119" stroke="#16a34a" stroke-width="3" marker-end="url(#arrowGreen2)"/>
+  <text x="600" y="105" fill="#16a34a" font-size="14" font-weight="bold">A·v = (8, 3)</text>
+  <text x="500" y="255" fill="#374151" font-size="13" font-weight="bold">after (x stretched ×2)</text>
+</svg>
