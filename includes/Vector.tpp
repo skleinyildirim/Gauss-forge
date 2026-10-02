@@ -96,9 +96,12 @@ void Vector<K>::scl(K a) {
 //ex01
 template <typename K>
 Vector<K> linear_combination(const std::vector<Vector<K>>& u, const std::vector<K>& coefs) {
+    assert(!u.empty());
+    assert(u.size() == coefs.size());
     std::vector<K> result(u[0].getSize(), K());
     using std::fma;
     for (size_t i = 0; i < u.size(); i++) {
+        assert(u[i].getSize() == u[0].getSize());
         const std::vector<K>& vect = u[i].getVector();
         for (size_t j = 0; j < u[i].getSize(); j++) {
             result[j] = fma(coefs[i], vect[j], result[j]);

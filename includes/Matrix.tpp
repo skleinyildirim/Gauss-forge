@@ -147,8 +147,11 @@ template <typename K>
 Vector<K> Matrix<K>::mul_vec(const Vector<K>& vec) const {
     assert(getNumberCols() == vec.getSize());
     std::vector<K> result(getNumberRows(), K());
+    using std::fma;
     for (size_t i = 0; i < getNumberRows(); i++) {
-        result[i] = vec.dot(_matrix[i]);
+        for (size_t k = 0; k < getNumberCols(); k++) {
+            result[i] = fma(_matrix[i][k], vec.getVector()[k], result[i]);
+        }
     }
     Vector<K> v(result);
     return (v);
@@ -196,9 +199,10 @@ template <typename K>
 Matrix<K> Matrix<K>::row_echelon() const {
     size_t pivot_row = 0;
     Matrix<K> result(*this);
+    double eps = 0.000001;
     for (size_t i = 0; i < getNumberCols(); i++) {
         for (size_t j = pivot_row; j < getNumberRows(); j++) {
-            if (result._matrix[j][i] != 0) {
+            if (abs_helper(result._matrix[j][i]) > eps) {
                 std::swap(result._matrix[pivot_row], result._matrix[j]);
                 K pivotValue = result._matrix[pivot_row][i];   // on sauvegarde AVANT de modifier
                 for (size_t k = 0; k < getNumberCols(); k++) {
@@ -220,7 +224,7 @@ Matrix<K> Matrix<K>::row_echelon() const {
     }
     for (size_t i = 0; i < getNumberRows(); i++) {
         for (size_t j = 0; j < getNumberCols(); j++) {
-            if (result._matrix[i][j] == 0)
+            if (abs_helper(result._matrix[i][j]) < eps)
                 result._matrix[i][j] = 0;
         }
     }
@@ -250,23 +254,42 @@ Matrix<K> Matrix<K>::getMinor(size_t rowToRemove, size_t colToRemove) const{
 
 template <typename K>
 K Matrix<K>::determinant() const {
+    assert(isSquare());
     if (getNumberCols() == 1 && getNumberRows() == 1)
         return (_matrix[0][0]);
-    K sum = 0;
-    int sign = 0;
-    for (size_t j = 0; j < getNumberCols(); j++) {
-        if (j % 2 == 0)
-            sign = 1;
-        else
-            sign = -1;
-        sum += _matrix[0][j] * sign * getMinor(0, j).determinant();
+    Matrix<K> m(*this);
+    double eps = 0.000001;
+    K det = 1;
+    K factor = 0;
+    size_t n = m.getNumberCols();
+    for (size_t c = 0; c < n; c++) {
+        size_t best = c;
+        for (size_t r = c + 1; r < n; r++) {
+            if (abs_helper(m._matrix[r][c]) > abs_helper(m._matrix[best][c]))
+                best = r;
+        }
+        if (abs_helper(m._matrix[best][c]) < eps)
+            return (K(0));
+        if (best != c) {
+            std::swap(m._matrix[best], m._matrix[c]);
+            det = det * -1;
+        }
+        for (size_t r = c + 1; r < n; r++) {
+            factor = m._matrix[r][c] / m._matrix[c][c];
+            for (size_t col = c; col < n; col++) {
+                m._matrix[r][col] = m._matrix[r][col] - factor * m._matrix[c][col];
+            }
+
+        }
+        det = det * m._matrix[c][c];
     }
-    return (sum);
+    return (det);
 }
 
 //ex12
 template <typename K>
 Matrix<K> Matrix<K>::inverse() const {
+    assert(isSquare());
     if (determinant() == 0)
         throw std::domain_error("Matrix is singular, cannot invert");
     Matrix<K> identity(getNumberRows(), getNumberRows());
@@ -295,9 +318,10 @@ template <typename K>
 size_t Matrix<K>::rank() const {
     Matrix<K> row_result = row_echelon();
     size_t result = 0;
+    double eps = 0.000001;
     for (size_t i = 0; i < row_result.getNumberRows(); i++) {
         for (size_t j = 0; j < row_result.getNumberCols(); j++) {
-            if (row_result._matrix[i][j] != 0) {
+            if (abs_helper(row_result._matrix[i][j]) > eps) {
                 result++;
                 break ;
             }

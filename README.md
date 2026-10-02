@@ -322,7 +322,7 @@ Tr(A) = Σ A[i][i]
 
 **Example**:
 ```
-[1 2]        [1 2]
+[1 2]        [1 0]
 [3 4]   →    [0 1]     (a non-singular matrix reduces to the identity)
 
 [1 2]        [1 2]
