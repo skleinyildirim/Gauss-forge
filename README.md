@@ -83,7 +83,7 @@ A **vector space** `V` over a field `K` is a set where you can:
 - **add** two vectors together (`u + v`)
 - **scale** a vector by a scalar (`λ·v`)
 
-...and these operations must respect a handful of intuitive rules (associativity, distributivity, an identity element, etc.) — see [`Chapter II.4`](#) of the subject for the formal axioms.
+...and these operations must respect a handful of intuitive rules (associativity, distributivity, an identity element, etc.) — see Chapter II.4 of the subject for the formal axioms.
 
 A function `f : V → W` is a **linear map** if it respects these operations:
 
@@ -109,7 +109,7 @@ graph LR
 
 GPUs excel at **SIMD** (Single Instruction, Multiple Data): running the *same* operation over *many* values in parallel — exactly what vector addition, scalar multiplication, and dot products are. This is why linear algebra sits at the core of computer graphics, physics engines, and machine learning.
 
-**FMA** (Fused Multiply-Add) computes `a×b + c` in a single hardware instruction, with only **one rounding step** instead of two — more accurate and often faster than doing the multiplication and addition separately. Several exercises below (`dot`, `linear_combination`) are required to use it (`std::fma`).
+**FMA** (Fused Multiply-Add) computes `a×b + c` in a single hardware instruction, with only **one rounding step** instead of two — more accurate and often faster than doing the multiplication and addition separately. Several exercises below (`linear_combination`, `dot`, `mul_vec`) use it (`std::fma`), as the subject allows.
 
 ---
 
@@ -305,7 +305,7 @@ Tr(A) = Σ A[i][i]
         ⎣ 4 5 6 ⎦            ⎣ 3 6 ⎦
 ```
 
-> 🔀 For **complex** matrices, the "real" transpose used in physics/electronics is the **conjugate transpose** (`transpose` + `conj` on every element) — because a complex number `a+bi` can be represented as a 2×2 rotation-scaling matrix `[[a,-b],[b,a]]`, whose transpose corresponds exactly to the conjugate `a-bi`.
+> 🔀 For **complex** matrices, the transpose used in physics/electronics is the **conjugate transpose** (`transpose` + `conj` on every element) — because a complex number `a+bi` can be represented as a 2×2 rotation-scaling matrix `[[a,-b],[b,a]]`, whose transpose corresponds exactly to the conjugate `a-bi`. Note that this implementation's `transpose()` is the **plain** transpose (no conjugation), for real and complex matrices alike.
 
 ---
 
@@ -314,7 +314,7 @@ Tr(A) = Σ A[i][i]
 **What it does**: reduces a matrix, via **Gauss-Jordan elimination**, until every row has a leading `1` (a *pivot*), with `0`s everywhere else in that pivot's column.
 
 **The algorithm** (column by column):
-1. Find a non-zero entry at or below the current pivot row, in the current column.
+1. Find a non-zero entry at or below the current pivot row, in the current column (non-zero means `|x| > ε`, with `ε = 1e-6`, to ignore rounding noise).
 2. **Swap** it into the pivot row.
 3. **Normalize**: divide the whole pivot row by the pivot value.
 4. **Eliminate**: subtract a multiple of the pivot row from every other row, to zero out that column everywhere else.
@@ -333,16 +333,22 @@ Tr(A) = Σ A[i][i]
 
 ### 11 · Determinant
 
-**What it does**: computes a single scalar `det(A)`, defined recursively via **Laplace / cofactor expansion**:
+**What it does**: computes a single scalar `det(A)` with **Gaussian elimination** — `O(n³)` time, `O(n²)` space (one working copy of the matrix). It works for any square size, not only `n ≤ 4`.
 
-```
-n = 1:  det([a]) = a
-n > 1:  det(A) = Σⱼ (-1)^j × A[0][j] × det(minor(0, j))
-```
+**The algorithm** (column by column, on a copy of `A`):
+1. Pick as pivot the row (from the current one downwards) whose entry has the **largest absolute value** (partial pivoting, for numerical stability).
+2. If that pivot is smaller than `ε = 1e-6`, the matrix is singular: return `0`.
+3. **Swap** it into place — every swap **flips the sign** of the determinant.
+4. **Eliminate**: subtract a multiple of the pivot row from every row *below* it (this does not change the determinant).
+5. Multiply the running result by the pivot.
 
-where `minor(i,j)` is `A` with row `i` and column `j` removed. Each smaller determinant "recycles" the technique of the dimension below it, down to the trivial `1×1` case.
+At the end the matrix is upper triangular, so `det(A) = (±1) × product of the pivots`.
 
-**Example**:
+> ⚠️ Unlike [`row_echelon`](#10--row-echelon-form), the pivot rows are **not** normalized to `1`: dividing a row by `k` would divide the determinant by `k`. And only the rows *below* the pivot are cleared, not the ones above.
+
+**Why not cofactor expansion?** `det(A) = Σⱼ (-1)^j × A[0][j] × det(minor(0, j))` is fine by hand, but it costs `O(n!)`; Gaussian elimination is `O(n³)`.
+
+**Example** (checked by hand with cofactors):
 ```
 det([[8,5,-2],[4,7,20],[7,6,1]])
  = 8×(7×1-20×6) - 5×(4×1-20×7) + (-2)×(4×6-7×7)
@@ -380,7 +386,7 @@ If `det(A) = 0`, the matrix is singular and **cannot** be inverted — this impl
 
 ### 13 · Rank
 
-**What it does**: counts the number of **linearly independent** rows/columns — i.e., the number of non-zero rows left after `row_echelon()`.
+**What it does**: counts the number of **linearly independent** rows/columns — i.e., the number of non-zero rows left after `row_echelon()` (a row counts as non-zero if one of its entries is larger than `ε = 1e-6`).
 
 **Intuition**: two vectors like `[1,0]` and `[2,0]` point in the *same* direction — together they still only span a line (rank 1), not the whole plane (which would be rank 2). The rank tells you the **dimension of the image** — how much of the output space is actually reached by the transformation.
 
@@ -412,6 +418,8 @@ This maps the **frustum** (the truncated pyramid of everything visible between t
 
 <p align="center"><img src="assets/frustum.svg" alt="Side view of the camera frustum between the near and far planes" width="500"></p>
 
+> ⚠️ **Sign of X in the code**: the derivation gives `+scale/ratio` in the top-left entry, but the code puts `-(scale/ratio)`. The sign was flipped after comparing with the display tool: without it, the image was mirrored compared to the one in the subject. It is an orientation convention (direction of the X axis / handedness of the display's frame), not a different construction.
+>
 > ⚠️ **Column-major output**: the display tool expects each **line** of the exported file to be a **column** of `P`, not a row. Since `transpose()` swaps rows and columns, printing the *rows* of `P.transpose()` is exactly equivalent to printing the *columns* of `P`.
 >
 > ⚠️ **Near/far and depth precision**: pushing `near` very small and `far` very large exaggerates a real problem — the Z mapping is **non-linear**, so precision is concentrated near the `near` plane and becomes very coarse near `far`. Extreme ratios cause visible artifacts ("z-fighting": flickering between two surfaces the depth buffer can no longer tell apart).
@@ -446,6 +454,8 @@ u.norm();      // = 9.64365   (always a real double, even for complex vectors)
 u.add(v);      // = [3+4i, 6+7i]
 ```
 
+> ⚠️ **`mul_vec` does not use `dot`**: `dot` conjugates its second argument, which is right for an inner product but wrong for `A·u`. For a complex matrix, `Σ A[i][j]·u[j]` must **not** conjugate the row of `A`, so `mul_vec` accumulates the products with `fma` directly.
+
 > 🔬 **Why physics cares**: quantum mechanics represents states as complex vectors, and the inner product `⟨ψ|φ⟩` (*bra-ket notation*) is literally this conjugated dot product. Electronics and control systems use complex numbers (*phasors*) to encode a signal's amplitude and phase simultaneously.
 
 ---
@@ -477,8 +487,10 @@ Example: `A=[[1,2],[2,4]]` sends `(x,y) → (x+2y)·(1,2)` — the image is a li
 
 ```bash
 make            # builds the ./matrix executable
-./matrix        # runs every exercise's tests, colour-coded by section
+./matrix        # runs every exercise's tests
 ```
+
+For each test, `./matrix` prints the inputs, the result (in colour), and `[OK]` or `[KO]` (with the expected value) compared with the example of the subject. It ends with a `passed` / `failed` summary (exit code `1` if a test fails), and also runs an `extra` section of harder cases (row swaps, 5×5 matrices, `det(AB) = det(A)·det(B)`, singular matrices, complex inverse…). Exercise 14 also writes the `proj` file (column-major) to feed the `display` tool.
 
 The `Makefile` compiles with `-Wall -Wextra -Werror`. Headers follow a `.hpp` (declarations) / `.tpp` (template definitions, included at the bottom of the `.hpp`) split, since template code must be visible at every point of instantiation.
 
