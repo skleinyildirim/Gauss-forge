@@ -234,25 +234,6 @@ Matrix<K> Matrix<K>::row_echelon() const {
 
 //ex11
 template <typename K>
-Matrix<K> Matrix<K>::getMinor(size_t rowToRemove, size_t colToRemove) const{
-    Matrix<K> result(getNumberRows() - 1, getNumberCols() - 1);
-    size_t destRow = 0;
-    for (size_t i = 0; i < getNumberRows(); i++) {
-        if (i == rowToRemove)
-            continue;
-        size_t destCol = 0;
-        for (size_t j = 0; j < getNumberCols(); j++) {
-            if (j == colToRemove)
-                continue;
-            result._matrix[destRow][destCol] = _matrix[i][j];
-            destCol++;
-        }
-        destRow++;
-    }
-    return (result);
-}
-
-template <typename K>
 K Matrix<K>::determinant() const {
     assert(isSquare());
     if (getNumberCols() == 1 && getNumberRows() == 1)
